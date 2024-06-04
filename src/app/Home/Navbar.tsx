@@ -1,4 +1,12 @@
+"use client";
+import { Drawer } from "antd";
+import { useState } from "react";
+import "../CSS/Navbar.css";
+
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
+  //   links for nav menu items
   const links = (
     <>
       <li className="text-red-500 cursor-pointer">Home</li>
@@ -13,6 +21,17 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  //   showing drawer upon clicking the hamburger for small devices
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  //   closing function for the drawer
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
     <header className="bg-white">
       <div className="mx-auto flex h-16 max-w-screen-2xl items-center gap-8 my-5 px-4 sm:px-6 lg:px-8">
@@ -79,8 +98,8 @@ const Navbar = () => {
           </svg>
         </div>
 
-        {/* header menu items */}
         <div className="flex flex-1 items-center justify-end md:justify-between">
+          {/* header menu items */}
           <nav aria-label="Global" className="hidden md:block">
             <ul className="flex items-center gap-6 text-lg font-semibold">
               {links}
@@ -96,7 +115,10 @@ const Navbar = () => {
               </button>
             </div>
             {/* hamburger menu showed only for small devices */}
-            <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+            <button
+              onClick={showDrawer}
+              className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
+            >
               <span className="sr-only">Toggle menu</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -114,6 +136,23 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
+          {/* small device hamburger menu drawer */}
+          <Drawer width={250} onClose={onClose} open={open}>
+            <div className="flex flex-col items-start gap-3">
+              <p className="text-red-500 text-lg font-bold cursor-pointer">
+                Home
+              </p>
+              <p className="hover:text-red-500 text-lg font-bold hover:transition-all hover:duration-400 cursor-pointer">
+                About Us
+              </p>
+              <p className="hover:text-red-500 text-lg font-bold hover:transition-all hover:duration-400 cursor-pointer">
+                Pricing
+              </p>
+              <p className="hover:text-red-500 text-lg font-bold hover:transition-all hover:duration-400 cursor-pointer">
+                Features
+              </p>
+            </div>
+          </Drawer>
         </div>
       </div>
     </header>

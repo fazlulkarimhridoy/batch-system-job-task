@@ -1,0 +1,3 @@
+body > div:nth-child(9) > div > div.ant-drawer-content-wrapper > div > div.ant-drawer-header.ant-drawer-header-close-only{
+    display: none;
+}
